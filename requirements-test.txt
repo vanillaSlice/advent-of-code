@@ -1,0 +1,4 @@
+coveralls==1.5.1
+pylint==2.2.2
+pytest==4.0.1
+pytest-cov==2.6.0
