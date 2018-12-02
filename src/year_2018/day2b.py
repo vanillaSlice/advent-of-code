@@ -16,7 +16,6 @@ def common_chars(box_ids):
             if str_without_i in common_at_index[i]:
                 return str_without_i
             common_at_index[i].add(str_without_i)
-    return None
 
 if __name__ == '__main__':
     with open(os.path.join(os.path.dirname(__file__), 'input/day2b.txt')) as f:

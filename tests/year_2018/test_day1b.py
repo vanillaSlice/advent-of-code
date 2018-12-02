@@ -9,5 +9,5 @@ def test_chronal_calibration_2():
 def test_chronal_calibration_3():
     assert chronal_calibration(['-6', '+3', '+8', '+5', '-6']) == 5
 
-def test_chronal_calibration_4():        
+def test_chronal_calibration_4():
     assert chronal_calibration(['+7', '+7', '-2', '-7', '-4']) == 14
