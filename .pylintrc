@@ -3,4 +3,5 @@ max-line-length=120
 
 [MESSAGES CONTROL]
 disable=inconsistent-return-statements,
-         missing-docstring
+        invalid-name,
+        missing-docstring
