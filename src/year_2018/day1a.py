@@ -8,9 +8,9 @@ from functools import reduce
 import os
 
 def chronal_calibration(changes):
-    return reduce(__sum_changes, changes, 0)
+    return reduce(sum_changes, changes, 0)
 
-def __sum_changes(total, current):
+def sum_changes(total, current):
     sign = current[0]
     number = int(current[1:])
     return total + number if sign == '+' else total - number

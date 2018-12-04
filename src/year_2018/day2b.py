@@ -4,14 +4,13 @@
 Solution to problem at https://adventofcode.com/2018/day/2#part2.
 """
 
+from collections import defaultdict
 import os
 
 def common_chars(box_ids):
-    common_at_index = {}
+    common_at_index = defaultdict(set)
     for box_id in box_ids:
         for i in range(len(box_id)):
-            if i not in common_at_index:
-                common_at_index[i] = set()
             str_without_i = box_id[:i] + box_id[i + 1:]
             if str_without_i in common_at_index[i]:
                 return str_without_i
