@@ -12,11 +12,8 @@ import re
 pattern = re.compile('\\[(?P<timestamp>\\d+\\-\\d+\\-\\d+ \\d+:\\d+)\\] (?P<message>.+)')
 
 def repose_record(records):
-    guard_slept_most = 0
-    minute_slept_most = 0
-
-    slept = {}
-    total_slept = defaultdict(int)
+    sleep_per_minute = defaultdict(lambda: defaultdict(int))
+    total_sleep = defaultdict(int)
 
     current_guard = 0
     started_sleeping = 0
@@ -28,15 +25,13 @@ def repose_record(records):
             started_sleeping = current_minute
         elif message == 'wakes up':
             for i in range(started_sleeping, current_minute):
-                slept[current_guard][i] += 1
-                total_slept[current_guard] += 1
+                sleep_per_minute[current_guard][i] += 1
+                total_sleep[current_guard] += 1
         else:
             current_guard = message.split(' ')[1][1:]
-            if current_guard not in slept:
-                slept[current_guard] = defaultdict(int)
 
-    guard_slept_most = max(total_slept, key=total_slept.get)
-    minute_slept_most = max(slept[guard_slept_most], key=slept[guard_slept_most].get)
+    guard_slept_most = max(total_sleep, key=total_sleep.get)
+    minute_slept_most = max(sleep_per_minute[guard_slept_most], key=sleep_per_minute[guard_slept_most].get)
 
     return int(guard_slept_most) * minute_slept_most
 
@@ -51,5 +46,4 @@ def parse_records(records):
 
 if __name__ == '__main__':
     with open(os.path.join(os.path.dirname(__file__), 'input/day4a.txt')) as f:
-        # 115167
         print('The answer is: {}'.format(repose_record(f.read().splitlines())))
