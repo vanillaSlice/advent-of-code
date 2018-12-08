@@ -13,7 +13,10 @@ def chronal_calibration(changes):
     for change in cycle(changes):
         sign = change[0]
         number = int(change[1:])
-        current_frequency = current_frequency + number if sign == '+' else current_frequency - number
+        if sign == '+':
+            current_frequency += number
+        else:
+            current_frequency -= number
         if current_frequency in frequencies_seen:
             return current_frequency
         frequencies_seen.add(current_frequency)
